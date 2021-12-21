@@ -9,8 +9,10 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function Header() {
+  const { data: session, status } = useSession();
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
       <div className="flex justify-between p-2 max-w-6xl mx-5 xl:mx-auto">
@@ -51,21 +53,31 @@ function Header() {
         <div className="flex items-center justify-end space-x-4">
           <HomeIcon className="navBtn" />
           <MenuIcon className="h-6 md:hidden cursor-pointer" />
-          <div className="relative navBtn">
-            <PaperAirplaneIcon className="navBtn rotate-45" />
-            <div className="absolute -top-2 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white animate-pulse">
-              3
-            </div>
-          </div>
-          <PlusCircleIcon className="navBtn" />
+          {session ? (
+            <>
+              <div className="relative navBtn">
+                <PaperAirplaneIcon className="navBtn rotate-45" />
+                <div className="absolute -top-2 -right-1 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white animate-pulse">
+                  3
+                </div>
+              </div>
+              <PlusCircleIcon
+                className="h-6 cursor-pointer"
+                onClick={() => setOpen(true)}
+              />
 
-          <UserGroupIcon className="navBtn" />
-          <HeartIcon className="navBtn" />
-          <img
-            className="cursor-pointer rounded-full h-10"
-            src="https://i.ibb.co/Mgwfjy9/theappcat-avatar-white.png"
-            alt="profile pic"
-          />
+              <UserGroupIcon className="navBtn" />
+              <HeartIcon className="navBtn" />
+              <img
+                onClick={signOut}
+                className="cursor-pointer rounded-full h-10 w-10"
+                src={session.user.image}
+                alt=""
+              />
+            </>
+          ) : (
+            <button onClick={signIn}>Sign In</button>
+          )}
         </div>
       </div>
     </div>
