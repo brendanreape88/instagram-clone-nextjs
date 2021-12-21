@@ -15,7 +15,7 @@ import { useRecoilState } from "recoil";
 
 function Header() {
   const { data: session, status } = useSession(modalState);
-  const [open, setOpen] = useRecoilState();
+  const [open, setOpen] = useRecoilState(modalState);
   const router = useRouter();
 
   return (
