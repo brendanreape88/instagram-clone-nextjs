@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import {
   SearchIcon,
@@ -10,29 +9,42 @@ import {
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { modalState } from "../atoms/modalAtom";
+import { useRecoilState } from "recoil";
 
 function Header() {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession(modalState);
+  const [open, setOpen] = useRecoilState();
+  const router = useRouter();
+
   return (
-    <div className="shadow-sm border-b bg-white sticky top-0 z-50">
+    <header className="shadow-sm border-b bg-white sticky top-0 z-50">
       <div className="flex justify-between p-2 max-w-6xl mx-5 xl:mx-auto">
-        {/* Left */}
-        <div className="relative hidden lg:inline-grid w-24">
+        <div
+          className="hidden relative w-24 lg:inline-grid cursor-pointer"
+          onClick={() => router.push("/")}
+        >
           <Image
             src="https://links.papareact.com/ocw"
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-        <div className="relative w-10 lg:hidden flex-shrink-0 cursor-pointer">
-          <Image
-            src="https://links.papareact.com/jjm"
+            alt="Picture of the author"
             layout="fill"
             objectFit="contain"
           />
         </div>
 
-        {/* Middle */}
+        <div
+          className="relative w-10 flex-shrink-0 lg:hidden cursor-pointer"
+          onClick={() => router.push("/")}
+        >
+          <Image
+            src="https://links.papareact.com/jjm"
+            alt="Picture of the author"
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
+
         <div className="max-w-xs">
           <div className="mt-1 p-3 relative rounded-md">
             <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
@@ -49,10 +61,11 @@ function Header() {
           </div>
         </div>
 
-        {/* Right */}
         <div className="flex items-center justify-end space-x-4">
-          <HomeIcon className="navBtn" />
+          <HomeIcon className="navBtn" onClick={() => router.push("/")} />
+
           <MenuIcon className="h-6 md:hidden cursor-pointer" />
+
           {session ? (
             <>
               <div className="relative navBtn">
@@ -70,7 +83,7 @@ function Header() {
               <HeartIcon className="navBtn" />
               <img
                 onClick={signOut}
-                className="cursor-pointer rounded-full h-10 w-10"
+                className="cursor-pointer rounded-full h-10"
                 src={session.user.image}
                 alt=""
               />
@@ -80,7 +93,7 @@ function Header() {
           )}
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 
