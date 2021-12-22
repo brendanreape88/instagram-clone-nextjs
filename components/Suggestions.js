@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
-import faker from "faker";
+import Suggestion from "./Suggestion";
+import avatar13 from "../assets/13.png";
+import avatar14 from "../assets/14.png";
+import avatar15 from "../assets/15.png";
+import avatar16 from "../assets/16.png";
+import avatar17 from "../assets/17.png";
 
 function Suggestions() {
-  const [suggestions, setSuggestions] = useState([]);
-
-  useEffect(() => {
-    const suggestions = [...Array(5)].map((_, i) => ({
-      ...faker.helpers.contextualCard(),
-      id: i,
-    }));
-
-    setSuggestions(suggestions);
-  }, []);
+  const avatars = [avatar13, avatar14, avatar15, avatar16, avatar17];
 
   return (
     <div className="mt-4 ml-10">
@@ -19,26 +14,15 @@ function Suggestions() {
         <h3 className="text-sm font-bold text-gray-400">Suggestions for you</h3>
         <button className="text-gray-600 font-semibold">See All</button>
       </div>
-
-      {suggestions.map((profile) => (
-        <div
-          key={profile.id}
-          className="flex items-center justify-between mt-3"
-        >
-          <img
-            className="w-10 h-10 rounded-full border p-[2px]"
-            src={profile.avatar}
-            alt=""
-          />
-          <div className="flex-1 ml-4">
-            <h2 className="font-semibold text-sm">{profile.username}</h2>
-            <h3 className="text-xs text-gray-400">
-              Works at {profile.company.name}
-            </h3>
-          </div>
-          <button className="text-blue-400 text-xs font-bold">Follow</button>
-        </div>
-      ))}
+      <Suggestion img={avatar13} username="janecooper" company="Microsoft" />
+      <Suggestion img={avatar14} username="cryptopunk1010" company="Coinbase" />
+      <Suggestion img={avatar15} username="svan79" company="Savannah Realty" />
+      <Suggestion
+        img={avatar16}
+        username="toddbrinks"
+        company="Uptown Design"
+      />
+      <Suggestion img={avatar17} username="darrellw90" company="Alphabet" />
     </div>
   );
 }

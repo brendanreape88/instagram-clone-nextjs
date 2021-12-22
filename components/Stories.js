@@ -22,21 +22,21 @@ function Stories() {
         <Story
           img={session.user.image}
           username={session.user.username}
-          session
+          currUser
         />
       )}
-      <Story img={avatar1} username="test" />
-      <Story img={avatar8} username="test" />
-      <Story img={avatar3} username="test" />
-      <Story img={avatar10} username="test" />
-      <Story img={avatar5} username="test" />
-      <Story img={avatar6} username="test" />
-      <Story img={avatar7} username="test" />
-      <Story img={avatar2} username="test" />
-      <Story img={avatar9} username="test" />
-      <Story img={avatar4} username="test" />
-      <Story img={avatar11} username="test" />
-      <Story img={avatar12} username="test" />
+      <Story img={avatar1} username="cam42" />
+      <Story img={avatar8} username="raffik" />
+      <Story img={avatar3} username="brooklyn" />
+      <Story img={avatar10} username="jamesjones" />
+      <Story img={avatar5} username="leslie.io" />
+      <Story img={avatar6} username="surfguru" />
+      <Story img={avatar7} username="theresawebb" />
+      <Story img={avatar2} username="katem88" />
+      <Story img={avatar9} username="itsalflores" />
+      <Story img={avatar4} username="guyhawkings" />
+      <Story img={avatar11} username="floydmiles" />
+      <Story img={avatar12} username="travel4ever" />
     </div>
   );
 }
